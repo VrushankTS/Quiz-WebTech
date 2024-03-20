@@ -7,7 +7,7 @@ import checkAuth from "../middleware/check_auth.js"
 
 const router = express.Router();
 
-router.post('/login', async (request, response) => {
+router.post('/api/users/login', async (request, response) => {
     const { errors, isValid } = loginValidator(request.body);
 
     if(!isValid) {
@@ -45,7 +45,7 @@ router.post('/login', async (request, response) => {
     }
 })
 
-router.post('/register', async (req, res) => {
+router.post('/api/users/register', async (req, res) => {
     const { errors, isValid } = registerValidator(req.body);       
 
     if (!isValid) {
@@ -74,7 +74,7 @@ router.post('/register', async (req, res) => {
     } 
 });
 
-router.get('/:id', checkAuth, (request, response) => {
+router.get('/api/users/:id', checkAuth, (request, response) => {
     Users.findOne({ _id: request.params.id}).then(user => {
         response.json({ user, success: true})
     }).catch(error => {

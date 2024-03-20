@@ -20,6 +20,7 @@ function CreateQuiz() {
     const [correctAnswer, setCorrectAnswer] = useState('');
     const [showToast, setShowToast] = useState(false);
     const [imgUrl, setImgUrl] = useState('');
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         if (!localStorage.getItem('JWT_PAYLOAD')) {
@@ -69,7 +70,8 @@ function CreateQuiz() {
             category: categoryVal,
             imgUrl
         };
-        axios.post('/api/users/create-quiz', {quiz, createdBy: localStorage.getItem('_ID')})
+    
+        axios.post('/api/quizzes/create-quiz', { quiz, createdBy: localStorage.getItem('_ID') })
             .then(res => {
                 if (res.data.success) {
                     setQuestions([]);
@@ -83,9 +85,19 @@ function CreateQuiz() {
                 }
             })
             .catch(err => {
-                console.error(err);
+                console.error("Error creating quiz:", err);
+    
+                // Check if the error response contains a message
+                let errorMessage = "Failed to create quiz. Please try again later.";
+                if (err.response && err.response.data && err.response.data.message) {
+                    errorMessage = err.response.data.message;
+                }
+    
+                // Set error state to display the error message to the user
+                setError(errorMessage);
             });
     };
+    
 
     return (
         <div className="create-quiz-wrapper">
@@ -118,6 +130,8 @@ function CreateQuiz() {
                             <span className="btn delete" onClick={() => removeQuestion(ques)}>Delete</span>
                         </div>
                     ))}
+
+                    {error && <div className="error-message">{error}</div>}
 
                     <div className="questions">
                         <div className="add-question" onClick={() => setAddQuestion(true)}>Add Question</div>

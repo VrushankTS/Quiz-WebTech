@@ -58,6 +58,9 @@ const QuizSchema = mongoose.Schema(
             type: Boolean,
             default: false
         }
+    },
+    { 
+        collection: 'quizzes' 
     }
 );
 
