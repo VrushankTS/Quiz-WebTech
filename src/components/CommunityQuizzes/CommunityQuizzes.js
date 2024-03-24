@@ -9,7 +9,7 @@ function CommunityQuizzes() {
     const [quizzes, setQuizzes] = useState([]);
     const [showToast, setShowToast] = useState(false);
     const [message, setMessage] = useState('');
-    const navigate = useNavigate(); // Initialize useNavigate
+    const navigate = useNavigate(); 
 
     useEffect(() => {
         axios.get('/api/quizzes/all-quizzes')
@@ -46,7 +46,7 @@ function CommunityQuizzes() {
     };
 
     const takeQuiz = (quizId) => {
-        navigate('/view-quiz?id=' + quizId); // Use navigate to redirect
+        navigate('/view-quiz?id=' + quizId);
     };
 
     return (

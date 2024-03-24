@@ -20,7 +20,8 @@ function MyQuizzes() {
 
     // Move takeQuiz inside the functional component
     const takeQuiz = (quizId) => {
-        navigate('/view-quiz?id=' + quizId); // Use navigate to redirect
+        console.log("Successfully taken quiz\n")
+        navigate('/api/quizzes/view-quiz?id=' + quizId); // Use navigate to redirect
     };
 
     return (

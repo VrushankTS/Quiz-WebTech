@@ -1,6 +1,7 @@
 import express from "express";
 import Quizzes from '../models/Quizzes.js';
 import Users from '../models/Users.js';
+import Scores from "../models/Scores.js";
 import checkAuth from '../middleware/check_auth.js';
 
 const router = express.Router();
@@ -94,7 +95,7 @@ router.post('/api/quizzes/like-quiz', checkAuth, (req, res) => {
     })
 });
 
-// router.post('/save-results', checkAuth, (req, res) => {
+// router.post('/api/quizzes/save-results', checkAuth, (req, res) => {
 //     let score = new Score({
 //         userId: req.body.currentUser,
 //         answers: req.body.answers,
@@ -110,7 +111,7 @@ router.post('/api/quizzes/like-quiz', checkAuth, (req, res) => {
 //     })
 // });
 
-// router.get('/results/:id', checkAuth, (req, res) => {
+// router.get('/api/quizzes/results/:id', checkAuth, (req, res) => {
 //     if (!req.params.id) {
 //         res.status(500).send("No id provided in params");
 //     } else {
